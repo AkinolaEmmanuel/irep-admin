@@ -6,7 +6,7 @@ import React from 'react';
 // import IconButton from '@mui/material/IconButton';
 // //import MenuIcon from '@mui/icons-material/Menu';
 import {Avatar, SvgIcon, IconButton, Toolbar, AppBar} from '@mui/material'
-import { Notifications } from '@mui/icons-material';
+import { NotificationsOutlined } from '@mui/icons-material';
 
 
 
@@ -51,7 +51,7 @@ const Nav: React.FC = () => {
           
            
           >
-            <Notifications fontSize='large'/>
+            <NotificationsOutlined fontSize='large'/>
           </IconButton>
           <IconButton
             edge="end"

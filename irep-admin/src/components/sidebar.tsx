@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Button, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
+import { Box, Button, List, ListItem, ListItemIcon, ListItemText, Typography} from '@mui/material';
 //import Dashboard from './dashboard';
 
 import GroupIcon from '@mui/icons-material/Groups';
@@ -15,7 +15,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeView, setActiveView }) => {
   return (
     <Box
       sx={{
-        width: 250,
+        width: 300,
         backgroundColor: '#fff',
         borderRight: '1px solid #e0e0e0',
         padding: 2,
@@ -37,6 +37,12 @@ const Sidebar: React.FC<SidebarProps> = ({ activeView, setActiveView }) => {
           </ListItemIcon>
           <ListItemText primary="User Management" />
         </ListItem>
+
+
+
+
+
+
         <ListItem button onClick={() => setActiveView('petitions')} 
              sx={{
                 backgroundColor: activeView === 'petitions' ? '#459173' : 'transparent',
@@ -49,7 +55,11 @@ const Sidebar: React.FC<SidebarProps> = ({ activeView, setActiveView }) => {
             <DescriptionIcon color='action'/>
           </ListItemIcon>
           <ListItemText primary="Petitions" />
+          <Typography sx={{backgroundColor: '#E7F6EC', color: '#000', padding: '0 8px', borderRadius: 5}}>10</Typography>
         </ListItem>
+
+
+
         <ListItem button onClick={() => setActiveView('contentModeration')} 
              sx={{
                 backgroundColor: activeView === 'contentModeration' ? '#459173' : 'transparent',
@@ -62,10 +72,12 @@ const Sidebar: React.FC<SidebarProps> = ({ activeView, setActiveView }) => {
             <ContentPasteIcon color='action'/>
           </ListItemIcon>
           <ListItemText primary="Content Moderation" />
+          <Typography sx={{backgroundColor: '#E7F6EC', color: '#000', padding: '0 8px', borderRadius: 5}}>10</Typography>
         </ListItem>
       </List>
        
       <Box sx={{ marginTop: 4 }}>
+        <Typography>Action</Typography>
         <Button variant="contained" fullWidth>
           Add Constituents
         </Button>

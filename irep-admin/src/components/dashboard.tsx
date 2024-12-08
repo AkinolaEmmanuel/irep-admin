@@ -56,6 +56,8 @@ import React from 'react';
 import { Box, Typography,  } from '@mui/material';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Civilians from './civilians';
+import CivilianProfile from './civilianprofile';
+import ContentModeration from './contentmoderation';
 
 interface DashboardProps {
   activeView: string;
@@ -72,8 +74,14 @@ const Dashboard: React.FC<DashboardProps> = ({activeView}) => {
           {/* <Typography variant="h5" sx={{ marginBottom: 3 }}>
             User Management
           </Typography> */}
-          <Civilians activeMenu= 'User Management'
-          />
+          {/* <Civilians activeMenu= 'User Management'
+          /> */}
+          <Router>
+        <Routes>
+        <Route path="/" element={<Civilians activeMenu= 'User Management'/>} />
+        <Route path="/civilian/:id" element={<CivilianProfile />} />
+        </Routes>
+        </Router>
         </>
       )}
 
@@ -87,7 +95,7 @@ const Dashboard: React.FC<DashboardProps> = ({activeView}) => {
       {/* Content Moderation View */}
       {activeView === 'contentModeration' && (
         <Typography variant="h5" sx={{ marginBottom: 3 }}>
-          Content Moderation Section
+          <ContentModeration/>
         </Typography>
       )}
     </Box>
