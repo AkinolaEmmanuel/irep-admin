@@ -43,7 +43,7 @@ const Civilians: React.FC<UserManagementProps> = ({ activeMenu }) => {
   };
   const columnRepConfigs = {
     'Verified Reps': ['Name', 'State', 'LGA', 'Polling unit'],
-    'Pending Verification': ['Name', 'Party', "Voter's card no"],
+    'Pending Verification': ['Name', 'Party', "Voter's card no", 'Status'],
     'Suspended Accounts': ['Name', 'LGA', 'Email', 'Action'],
     
   };
@@ -62,12 +62,13 @@ const Civilians: React.FC<UserManagementProps> = ({ activeMenu }) => {
     status: 'Pending',
   }));
 
-  const representatives = Array.from({ length: 5 }, (_, index) => ({
+  const representatives = Array.from({ length: 50 }, (_, index) => ({
     id: index + 1,
     name: `Representative ${index + 1}`,
     email: `representative${index + 1}@example.com`,
     avatar: `https://i.pravatar.cc/40?img=${index + 11}`,
     status: 'Pending',
+    
   }));
 
   const handleAction = (id: number, action: 'approve' | 'decline') => {
@@ -82,7 +83,7 @@ const Civilians: React.FC<UserManagementProps> = ({ activeMenu }) => {
 
   const handleTabChange = (newTab: string) => {
     setActiveTab(newTab);
-    setFilter(newTab === 'Civilians' ? 'ALl' : 'Verified Reps');
+    setFilter(newTab === 'Civilians' ? 'ALl' : 'Pending Verification');
     setRows(newTab === 'Civilians' ? civilians : representatives);
     setPage(1);
   };
@@ -95,7 +96,7 @@ const Civilians: React.FC<UserManagementProps> = ({ activeMenu }) => {
     const filteredRows =
       activeTab === 'Civilians'
         ? civilians.filter((row) => row.status === filter || filter === 'All')
-        : representatives.filter((row) => row.status === filter || filter === 'Verified Reps');
+        : representatives.filter((row) => row.status === filter || filter === 'Pending Verification');
         
     setRows(filteredRows);
   }, [filter, activeTab]);
@@ -106,9 +107,15 @@ const Civilians: React.FC<UserManagementProps> = ({ activeMenu }) => {
     setPage(1);
   };
 
+  
   const handleRowClick = (id: number) => {
-    navigate(`/civilian/${id}`);
-  };
+  if (activeTab === "Civilians" && activeTab !== "Representatives") {
+      navigate(`/civilian/${id}`);
+  }
+  else {
+      navigate(`/Reps profile/${id}`);
+  }
+  }
 
   const rowsToShow = rows.slice((page - 1) * rowsPerPage, page * rowsPerPage);
 

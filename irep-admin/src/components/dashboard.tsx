@@ -60,6 +60,7 @@ import CivilianProfile from './civilianprofile';
 import Petitions from './petitions';
 import ContentModeration from './contentmoderation';
 import  AddConstituents  from './addConstituents';
+import Repsprofile from './repsprofile';
 
 interface DashboardProps {
   activeView: string;
@@ -82,6 +83,7 @@ const Dashboard: React.FC<DashboardProps> = ({activeView}) => {
         <Routes>
         <Route path="/" element={<Civilians activeMenu= 'User Management'/>} />
         <Route path="/civilian/:id" element={<CivilianProfile />} />
+        <Route path="/Reps profile/:id" element={<Repsprofile />} />
         </Routes>
         </Router>
         </>
