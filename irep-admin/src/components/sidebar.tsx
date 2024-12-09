@@ -5,6 +5,7 @@ import { Box, Button, List, ListItem, ListItemIcon, ListItemText, Typography} fr
 import GroupIcon from '@mui/icons-material/Groups';
 import DescriptionIcon from '@mui/icons-material/Description';
 import ContentPasteIcon from '@mui/icons-material/ContentPaste';
+import AddIcon from '@mui/icons-material/Add';
 interface SidebarProps {
     activeView: string;
     setActiveView: React.Dispatch<React.SetStateAction<string>>;
@@ -77,8 +78,16 @@ const Sidebar: React.FC<SidebarProps> = ({ activeView, setActiveView }) => {
       </List>
        
       <Box sx={{ marginTop: 4 }}>
-        <Typography>Action</Typography>
-        <Button variant="contained" fullWidth>
+        <Typography variant='h6' color='#667185' sx={{ marginTop: 2 }}>Action</Typography>
+        <Button variant="contained" fullWidth onClick={() => setActiveView('addConstituents')} 
+        sx={{
+                backgroundColor: activeView === 'addConstituents' ? '#459173' : '#F9FAFB',
+                color: activeView === 'addConstituents' ? '#fff' : '#459173',
+                '&:hover': {
+                  backgroundColor: activeView === 'addConstituents' ? '#459173' : '#f0f0f0',
+                }, border:'#B5E3C4 solid 1px'
+            }}>
+              <AddIcon/>
           Add Constituents
         </Button>
       </Box>

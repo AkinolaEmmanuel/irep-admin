@@ -57,7 +57,9 @@ import { Box, Typography,  } from '@mui/material';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Civilians from './civilians';
 import CivilianProfile from './civilianprofile';
+import Petitions from './petitions';
 import ContentModeration from './contentmoderation';
+import  AddConstituents  from './addConstituents';
 
 interface DashboardProps {
   activeView: string;
@@ -88,7 +90,7 @@ const Dashboard: React.FC<DashboardProps> = ({activeView}) => {
       {/* Petitions View */}
       {activeView === 'petitions' && (
         <Typography variant="h5" sx={{ marginBottom: 3 }}>
-          Petitions Section
+          <Petitions/>
         </Typography>
       )}
 
@@ -96,6 +98,13 @@ const Dashboard: React.FC<DashboardProps> = ({activeView}) => {
       {activeView === 'contentModeration' && (
         <Typography variant="h5" sx={{ marginBottom: 3 }}>
           <ContentModeration/>
+        </Typography>
+      )}
+
+      {/* Add Constituents */}
+      {activeView === 'addConstituents' && (
+        <Typography variant="h5" sx={{ marginBottom: 3 }}>
+          <AddConstituents/>
         </Typography>
       )}
     </Box>

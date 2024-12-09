@@ -1,5 +1,5 @@
 // mui
-import { createTheme, ThemeOptions } from "@mui/material/styles";
+import { createTheme } from "@mui/material/styles";
 
 //
 import { lightGeneralColors } from "./color.tsx";
