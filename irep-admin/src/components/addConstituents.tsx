@@ -175,7 +175,7 @@ const AddConstituents: React.FC = () => {
 <Button
   variant="outlined"
   onClick={handleLgaOpen}
-  sx={{ textTransform: 'none', color: '#344054', marginTop: 2, border: '#E4E7EC solid 1px', padding: 3.75 }}
+  sx={{ textTransform: 'none', color: '#344054', marginTop: 2, border: '#E4E7EC solid 1px', padding: 3.5 }}
 >
   {selectedLga || 'Select a LGA'} 
 
