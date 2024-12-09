@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { Box, Typography, Button, InputBase, Menu, MenuItem, Paper, TextField, Modal } from "@mui/material";
-import { Search, ArrowDropDown, Close} from '@mui/icons-material';
+import { Search} from '@mui/icons-material';
 
 
 const AddConstituents: React.FC = () => {
@@ -47,45 +47,57 @@ const AddConstituents: React.FC = () => {
         borderRadius: 5
       };
 
-      const [openModal, setOpenModal] = useState(false);
-      const handleOpenModal = () => setOpenModal(true);
-      const handleCloseModal = () => setOpenModal(false);
+
+  // State dropdown states
+  const [stateAnchorEl, setStateAnchorEl] = useState<null | HTMLElement>(null);
+  const [stateSearchTerm, setStateSearchTerm] = useState("");
+  const [selectedState, setSelectedState] = useState("");
+
+  // LGA dropdown states
+  const [lgaAnchorEl, setLgaAnchorEl] = useState<null | HTMLElement>(null);
+  const [lgaSearchTerm, setLgaSearchTerm] = useState("");
+  const [selectedLga, setSelectedLga] = useState("");
+
+
+
+  // Modal state
+  const [openModal, setOpenModal] = useState(false);
+  const handleOpenModal = () => setOpenModal(true);
+  const handleCloseModal = () => setOpenModal(false);
+
+  // State handlers
+  const handleStateOpen = (event: React.MouseEvent<HTMLElement>) => {
+    setStateAnchorEl(event.currentTarget);
+  };
+  const handleStateClose = () => {
+    setStateAnchorEl(null);
+  };
+  const handleSelectState = (state: string) => {
+    setSelectedState(state);
+    handleStateClose();
+  };
+
+  // LGA handlers
+  const handleLgaOpen = (event: React.MouseEvent<HTMLElement>) => {
+    setLgaAnchorEl(event.currentTarget);
+  };
+  const handleLgaClose = () => {
+    setLgaAnchorEl(null);
+  };
+  const handleSelectLga = (lga: string) => {
+    setSelectedLga(lga);
+    handleLgaClose();
+  };
+
+  // Filtered options
+  const filteredStates = states.filter((state) =>
+    state.toLowerCase().includes(stateSearchTerm.toLowerCase())
+  );
+  const filteredLgas = lgas.filter((lga) =>
+    lga.toLowerCase().includes(lgaSearchTerm.toLowerCase())
+  );
+
  
-        const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-        const [searchTerm, setSearchTerm] = useState('');
-        const [selectedState, setSelectedState] = useState('');
-        const [selectedLga, setSelectedLga] = useState('');
-      
-        const handleOpen = (event: React.MouseEvent<HTMLElement>) => {
-          setAnchorEl(event.currentTarget);
-        };
-      
-        const handleClose = () => {
-          setAnchorEl(null);
-        };
-      
-        const handleSelectState = (state: string) => {
-          setSelectedState(state);
-          handleClose();
-        };
-        const handleSelectLga = (lga: string) => {
-            setSelectedLga(lga);
-            handleClose();
-          };
-
-          const handleRemove = (state: string) => {
-            setSelectedStates(selectedStates.filter((s) => s !== state));
-          };
-
-        
-      
-        const filteredStates = states.filter((state) =>
-          state.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-
-        const filteredLgas = lgas.filter((lga) =>
-            lga.toLowerCase().includes(searchTerm.toLowerCase())
-          );
   return (
     <Box sx={{margin: 'auto', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
 
@@ -96,16 +108,16 @@ const AddConstituents: React.FC = () => {
       <Box>
       <Button
         variant="outlined"
-        onClick={handleOpen}
+        onClick={handleStateOpen}
         sx={{ textTransform: 'none', color: '#344054', marginTop: 2, border: '#E4E7EC solid 1px', padding: 3.5 }}
       >
         {selectedState || 'Select a state'} 
-        <ArrowDropDown/>
+
       </Button>
       <Menu
-        anchorEl={anchorEl}
-        open={Boolean(anchorEl)}
-        onClose={handleClose}
+        anchorEl={stateAnchorEl}
+        open={Boolean(stateAnchorEl)}
+        onClose={handleStateClose}
         PaperProps={{
           style: {
             maxHeight: 300,
@@ -118,8 +130,8 @@ const AddConstituents: React.FC = () => {
           <InputBase
             placeholder="Search states"
             fullWidth
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            value={stateSearchTerm}
+            onChange={(e) => setStateSearchTerm(e.target.value)}
           />
         </Paper>
         {filteredStates.length ? (
@@ -162,17 +174,17 @@ const AddConstituents: React.FC = () => {
 <Box display={'flex'} gap={3}>
 <Button
   variant="outlined"
-  onClick={handleOpen}
+  onClick={handleLgaOpen}
   sx={{ textTransform: 'none', color: '#344054', marginTop: 2, border: '#E4E7EC solid 1px', padding: 3.75 }}
 >
   {selectedLga || 'Select a LGA'} 
-  {selectedLga ? <Close /> : <ArrowDropDown />}
+
 
 </Button>
  <Menu
-  anchorEl={anchorEl}
-  open={Boolean(anchorEl)}
-  onClose={handleClose}
+  anchorEl={lgaAnchorEl}
+  open={Boolean(lgaAnchorEl)}
+  onClose={handleLgaClose}
   PaperProps={{
     style: {
       maxHeight: 300,
@@ -185,8 +197,8 @@ const AddConstituents: React.FC = () => {
     <InputBase
       placeholder="Search Local Government Areas"
       fullWidth
-      value={searchTerm}
-      onChange={(e) => setSearchTerm(e.target.value)}
+      value={lgaSearchTerm}
+      onChange={(e) => setLgaSearchTerm(e.target.value)}
     />
   </Paper>
   {filteredLgas.length ? (
@@ -218,6 +230,7 @@ const AddConstituents: React.FC = () => {
 </Menu> 
 <Box sx={{marginTop: 2}}>
     <TextField fullWidth label='Input the new LGA'></TextField>
+    {/* <input type='text'> Input the new LGA</input> */}
 </Box>
 </Box>
 </Box>
